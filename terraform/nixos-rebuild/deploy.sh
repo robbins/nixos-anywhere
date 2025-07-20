@@ -24,6 +24,7 @@ trap 'rm -rf "$workDir"' EXIT
 sshOpts=(-p "${TARGET_PORT}")
 sshOpts+=(-o UserKnownHostsFile=/dev/null)
 sshOpts+=(-o StrictHostKeyChecking=no)
+sshOpts+=(-o ControlMaster=no)
 
 set +x
 if [[ -n ${SSH_KEY+x} && ${SSH_KEY} != "-" ]]; then
