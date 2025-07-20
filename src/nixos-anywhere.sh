@@ -718,7 +718,7 @@ runDisko() {
   fi
 
   step Formatting hard drive with disko
-  runSsh "$diskoScript"
+  runSsh "sudo $diskoScript"
 }
 
 nixosInstall() {
@@ -738,7 +738,7 @@ nixosInstall() {
     step Copying extra files
     tar -C "$extraFiles" -cpf- . | runSsh "tar -C /mnt -xf- --no-same-owner"
 
-    runSsh "chmod 755 /mnt" # tar also changes permissions of /mnt
+    runSsh "sudo chmod 755 /mnt" # tar also changes permissions of /mnt
   fi
 
   if [[ ${#extraFilesOwnership[@]} -gt 0 ]]; then
@@ -774,7 +774,7 @@ fi
 if [ ! -z ${NIXOS_NO_CHECK+0} ]; then
   export NIXOS_NO_CHECK
 fi
-nixos-install --no-root-passwd --no-channel-copy --system "$nixosSystem"
+sudo nixos-install --no-root-passwd --no-channel-copy --system "$nixosSystem"
 SSH
 
 }
@@ -788,7 +788,7 @@ nixosReboot() {
     swapoff -a
     zpool export -a || true
   fi
-  nohup sh -c 'sleep 6 && reboot' >/dev/null &
+  nohup sh -c 'sleep 6 && sudo reboot' >/dev/null &
 SSH
 
   step Waiting for the machine to become unreachable due to reboot
