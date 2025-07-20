@@ -695,7 +695,7 @@ TMPDIR=/root/kexec setsid --wait ${maybeSudo} /root/kexec/kexec/run --kexec-extr
   while runSshTimeout -- exit 0; do sleep 1; done
 
   # After kexec we explicitly set the user to root@
-  sshConnection="root@${sshHost}"
+  #sshConnection="root@${sshHost}"
 
   # waiting for machine to become available again
   until runSsh -o ConnectTimeout=10 -- exit 0; do sleep 5; done
@@ -898,11 +898,11 @@ main() {
 
   # Installation will fail if non-root user is used for installer.
   # Switch to root user by copying authorized_keys.
-  if [[ ${isInstaller} == "y" ]] && [[ ${sshUser} != "root" ]]; then
-    # Allow copy to fail if authorized_keys does not exist, like if using /etc/ssh/authorized_keys.d/
-    runSsh "${maybeSudo} mkdir -p /root/.ssh; ${maybeSudo} cp ~/.ssh/authorized_keys /root/.ssh || true"
-    sshConnection="root@${sshHost}"
-  fi
+  #if [[ ${isInstaller} == "y" ]] && [[ ${sshUser} != "root" ]]; then
+  #  # Allow copy to fail if authorized_keys does not exist, like if using /etc/ssh/authorized_keys.d/
+  #  runSsh "${maybeSudo} mkdir -p /root/.ssh; ${maybeSudo} cp ~/.ssh/authorized_keys /root/.ssh || true"
+  #  sshConnection="root@${sshHost}"
+  #fi
 
   # Get substituters from the machine and add them to the installer
   if [[ ${machineSubstituters} == "y" && -n ${flake} ]]; then
