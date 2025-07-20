@@ -11,6 +11,8 @@ done < <(jq -j 'to_entries[] | (.key, "\u0000", .value, "\u0000")' <<<"${ARGUMEN
 
 args=()
 
+args+=("--no-disko-deps")
+
 if [[ ${input[debug_logging]} == "true" ]]; then
   set -x
   declare -p input
