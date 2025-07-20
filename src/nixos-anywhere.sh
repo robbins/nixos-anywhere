@@ -66,7 +66,7 @@ mkdir -p "$tempDir"
 declare -A diskEncryptionKeys=()
 declare -A extraFilesOwnership=()
 declare -a nixCopyOptions=()
-declare -a sshArgs=("-o" "IdentitiesOnly=yes" "-i" "$tempDir/nixos-anywhere" "-o" "UserKnownHostsFile=/dev/null" "-o" "StrictHostKeyChecking=no")
+declare -a sshArgs=("-o" "ControlMaster=no" "-o" "ControlPersist=60" "-o" "IdentitiesOnly=yes" "-i" "$tempDir/nixos-anywhere" "-o" "UserKnownHostsFile=/dev/null" "-o" "StrictHostKeyChecking=no" "-o" "ControlMaster=no" "-o" "ControlPersist=60")
 
 showUsage() {
   cat <<USAGE
