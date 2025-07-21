@@ -718,7 +718,7 @@ runDisko() {
   fi
 
   step Formatting hard drive with disko
-  runSsh "$diskoScript"
+  runSsh "${maybe_sudo}" "$diskoScript"
 }
 
 nixosInstall() {
@@ -898,11 +898,11 @@ main() {
 
   # Installation will fail if non-root user is used for installer.
   # Switch to root user by copying authorized_keys.
-  if [[ ${isInstaller} == "y" ]] && [[ ${sshUser} != "root" ]]; then
-    # Allow copy to fail if authorized_keys does not exist, like if using /etc/ssh/authorized_keys.d/
-    runSsh "${maybeSudo} mkdir -p /root/.ssh; ${maybeSudo} cp ~/.ssh/authorized_keys /root/.ssh || true"
-    sshConnection="root@${sshHost}"
-  fi
+  # if [[ ${isInstaller} == "y" ]] && [[ ${sshUser} != "root" ]]; then
+  #   # Allow copy to fail if authorized_keys does not exist, like if using /etc/ssh/authorized_keys.d/
+  #   runSsh "${maybeSudo} mkdir -p /root/.ssh; ${maybeSudo} cp ~/.ssh/authorized_keys /root/.ssh || true"
+  #   sshConnection="root@${sshHost}"
+  # fi
 
   # Get substituters from the machine and add them to the installer
   if [[ ${machineSubstituters} == "y" && -n ${flake} ]]; then
