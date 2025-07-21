@@ -718,7 +718,7 @@ runDisko() {
   fi
 
   step Formatting hard drive with disko
-  runSsh "${maybe_sudo}" "$diskoScript"
+  runSsh "${maybeSudo}" "$diskoScript"
 }
 
 nixosInstall() {
